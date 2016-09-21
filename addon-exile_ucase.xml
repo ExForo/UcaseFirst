@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="exile_ucase" title="[Exile] Первая буква темы" version_string="1.0.1" version_id="101" url="https://xenforo.info/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="exileUcase_option_template_adjustTitleCase"><![CDATA[<xen:checkboxunit label="">
+	<xen:option name="meh" label="{$preparedOption.title}" value="1" selected="{$preparedOption.option_value}">
+		<xen:radio name="{$fieldPrefix}[{$preparedOption.option_id}]" value="{$preparedOption.option_value}" inputclass="autoSize">
+			<xen:option value="ucwords" hint="{xen:phrase my_thread_title_title_case}" selected="!{$preparedOption.option_value}">{xen:phrase title_case}</xen:option>
+			<xen:option value="ucfirst" hint="{xen:phrase my_thread_title_sentence_case}">{xen:phrase sentence_case}</xen:option>
+			<xen:option value="firstletter" hint="{xen:phrase exile_ucase_only_first_hint}">{xen:phrase exile_ucase_only_first}</xen:option>
+		</xen:radio>
+	</xen:option>
+
+	<xen:html>
+		{xen:raw $editLink}
+		<input type="hidden" name="{$listedFieldName}" value="{$preparedOption.option_id}" />
+	</xen:html>
+
+	<xen:explain>{xen:raw $preparedOption.explain}</xen:explain>
+</xen:checkboxunit>
+]]></template>
+  </admin_templates>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class_datawriter" execute_order="10" callback_class="Exile_Ucase_Listener" callback_method="extendDataWriterDiscussion" active="1" hint="XenForo_DataWriter_Discussion_Thread" description="Extend thread title check"/>
+    <listener event_id="template_post_render" execute_order="10" callback_class="Exile_Ucase_Listener" callback_method="templatePostRenderAdjustTitleCase" active="1" hint="option_template_adjustTitleCase" description="Extend admin panel option for title case"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="exile_ucase_only_first" version_id="100" version_string="1.0.0"><![CDATA[Регистр только первой буквы]]></phrase>
+    <phrase title="exile_ucase_only_first_hint" version_id="100" version_string="1.0.0"><![CDATA[До: мой заголовок темы<br />
+После: <b>М</b>ой заголовок темы]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications/>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
